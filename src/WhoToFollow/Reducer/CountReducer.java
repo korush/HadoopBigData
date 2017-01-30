@@ -1,0 +1,26 @@
+package WhoToFollow.Reducer;
+
+import java.io.IOException;
+
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Reducer;
+
+import Common.UserProfile;
+
+public class CountReducer extends Reducer<IntWritable, IntWritable, IntWritable, Text> {
+
+    public void reduce(IntWritable key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException
+    {
+    	UserProfile user = new UserProfile(key.get());
+    	
+        while (values.iterator().hasNext()) 
+        {
+            int userWithCommonFriend = values.iterator().next().get();
+            user.addCommonFriend(userWithCommonFriend);
+        }
+        
+        Text result = new Text(user.toStringCommonFriends());
+        context.write(new IntWritable(user.getUser()), result);
+    }
+}

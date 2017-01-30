@@ -1,7 +1,6 @@
 package WhoToFollow.Mapper;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import org.apache.hadoop.io.IntWritable;
