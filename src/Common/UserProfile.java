@@ -55,8 +55,20 @@ public class UserProfile
 	
 	public void addCommonFriend(Integer friend)
 	{
-		this.commonFriends.put(friend, this.commonFriends.getOrDefault(friend, 0) + 1);
+		if(friend < 0)
+		{
+			this.addFriend(friend);
+			this.commonFriends.remove(-1 * friend); 
+			return;
+		}
 		
+		if(this.isFriend(-1 * friend))
+		{
+			this.commonFriends.remove(-1 * friend);
+			return;
+		}
+		
+		this.commonFriends.put(friend, this.commonFriends.getOrDefault(friend, 0) + 1);
 	}
 
 	public String toStringCommonFriends()
