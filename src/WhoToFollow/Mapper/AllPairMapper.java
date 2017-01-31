@@ -14,13 +14,14 @@ public class AllPairMapper extends Mapper<Object, Text, IntWritable, IntWritable
 {
     public void map(Object key, Text values, Context context) throws IOException, InterruptedException {
 
-        StringTokenizer st = new StringTokenizer(values.toString());
+    	StringTokenizer st = new StringTokenizer(values.toString());
 
         ArrayList<Integer> seenFriends = new ArrayList<>(); 
 
         IntWritable friend1 = new IntWritable();
         IntWritable friend2 = new IntWritable();
-        IntWritable user = new IntWritable(Integer.parseInt(st.nextToken())); 
+        IntWritable user = new IntWritable(Integer.parseInt(st.nextToken()));
+        
 
         while (st.hasMoreTokens()) 
         {

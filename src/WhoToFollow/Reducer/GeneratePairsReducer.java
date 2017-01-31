@@ -1,12 +1,9 @@
 package WhoToFollow.Reducer;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
-
 import Common.UserProfile;
 
 public class GeneratePairsReducer  extends Reducer<IntWritable, IntWritable, IntWritable, Text> 

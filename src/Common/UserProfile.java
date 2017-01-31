@@ -7,11 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.TreeMap;
-
-import com.google.common.collect.Ordering;
-
-
 
 public class UserProfile 
 {
