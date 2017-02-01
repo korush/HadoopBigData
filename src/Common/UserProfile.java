@@ -33,9 +33,18 @@ public class UserProfile
 		return this.user;
 	}
 	
-	public void addFollower(Integer follower)
+	public void addFollower(int follower)
 	{
+		if( this.isFollwer(follower))
+			return;
+		
 		this.followers.add(follower);
+	}
+	
+	public boolean isFollwer(int follower)
+	{
+		int idx = this.followers.indexOf(follower);
+		return idx > -1;
 	}
 	
 	
