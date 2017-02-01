@@ -16,38 +16,32 @@ public class AllPairMapper extends Mapper<Object, Text, IntWritable, IntWritable
 
     	StringTokenizer st = new StringTokenizer(values.toString());
 
-        ArrayList<Integer> seenFriends = new ArrayList<>(); 
+        ArrayList<Integer> seenFollowers = new ArrayList<>(); 
 
-        IntWritable friend1 = new IntWritable();
-        IntWritable friend2 = new IntWritable();
+        IntWritable f1 = new IntWritable();
+        IntWritable f2 = new IntWritable();
         IntWritable user = new IntWritable(Integer.parseInt(st.nextToken()));
         
 
         while (st.hasMoreTokens()) 
         {
-            friend1.set(Integer.parseInt(st.nextToken()));
-            if(friend1.get() < 0)
-            {
-            	System.out.println(user + "," + friend1);
-            	context.write(user, friend1);
-            	continue;
-            }
+        	f1.set(Integer.parseInt(st.nextToken()));
             
-            for (Integer seenFriend : seenFriends) {
-            	if(seenFriend < 0)
-            		continue;
+        	if(f1.get() < 0 )
+        	{
+        		context.write(user, f1);
+        		continue;
+        	}
+        	
+            for (Integer seenFollower : seenFollowers) {
             	
-                friend2.set(seenFriend);
-                
-                context.write(friend1, friend2);
-                context.write(friend2, friend1);
-                System.out.println(friend1 + "," + friend2);
-                System.out.println(friend2 + "," + friend1);
-            }
-            seenFriends.add(friend1.get());
+            	f2.set(seenFollower);
+                context.write(f1, f2);
+                context.write(f2, f1);
             
-//            context.write(user, new IntWritable(-1 * friend1.get()));
-
+            }
+            
+            seenFollowers.add(f1.get());
             
         }
     }

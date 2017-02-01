@@ -14,14 +14,16 @@ public class UserProfile
 	{
 		this.setUser(uid);
 		this.followers = new ArrayList<Integer>();
-		this.commonFriends = new HashMap<Integer, Integer>();
+		this.followings = new ArrayList<Integer>();
+		this.commonFollowers = new HashMap<Integer, Integer>();
 	}
 	
 	private Integer user;
 	
 	private ArrayList<Integer> followers;
+	private ArrayList<Integer> followings;
 	
-	public HashMap<Integer, Integer> commonFriends;
+	public HashMap<Integer, Integer> commonFollowers;
 	
 	public void setUser(Integer uid)
 	{
@@ -35,23 +37,51 @@ public class UserProfile
 	
 	public void addFollower(int follower)
 	{
-		if( this.isFollwer(follower))
+		if( this.isFollower(follower))
 			return;
 		
 		this.followers.add(follower);
 	}
 	
-	public boolean isFollwer(int follower)
+	public boolean isFollower(int follower)
 	{
 		int idx = this.followers.indexOf(follower);
 		return idx > -1;
 	}
 	
-	
-	public void addCommonFriend(Integer friend, Integer count)
+	public void addFollowing(int following)
 	{
-		this.commonFriends.put(friend, count);
+		if( this.isFollowing(following))
+			return;
+		
+		this.followings.add(following);
 	}
+	
+	public boolean isFollowing(int following)
+	{
+		int idx = this.followings.indexOf(following);
+		return idx > -1;
+	}
+	
+	
+	public void addCommonFollower(Integer follower)
+	{
+		if( follower < 0)
+		{
+			this.addFollower(-1 * follower);
+			this.commonFollowers.remove(-1 * follower); 
+			return;
+		}
+		
+		if(this.isFollower(follower))
+		{
+			this.commonFollowers.remove(-1 * follower);
+			return;
+		}
+			
+		this.commonFollowers.put(follower, this.commonFollowers.getOrDefault(follower, 0) + 1);
+	}
+
 
 	public String toStringCommonFriends()
 	{
@@ -63,13 +93,13 @@ public class UserProfile
 			} 
 		};
 
-		 Set<Entry<Integer, Integer>> entries = this.commonFriends.entrySet();
+		 Set<Entry<Integer, Integer>> entries = this.commonFollowers.entrySet();
 		 List<Entry<Integer, Integer>> listOfEntries = new ArrayList<Entry<Integer, Integer>>(entries);
 		 Collections.sort(listOfEntries, valueComparator);
 
 		 
 		StringBuffer sb = new StringBuffer(""); 
-		listOfEntries.forEach((commonFriend) -> sb.append(commonFriend.getKey() + "(" + commonFriend.getValue() + ") "));
+		listOfEntries.forEach((commonFollower) -> sb.append(commonFollower.getKey() + "(" + commonFollower.getValue() + ") "));
 		return sb.toString();
 	}
 	
@@ -81,6 +111,9 @@ public class UserProfile
 		for (Integer f : this.followers)
 			sb.append(f + " ");
         
+		for (Integer f : this.followings)
+			sb.append(f + " ");
+		
 		return sb.toString().trim();
 	}
 	

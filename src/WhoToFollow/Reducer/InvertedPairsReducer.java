@@ -15,8 +15,11 @@ public class InvertedPairsReducer  extends Reducer<IntWritable, IntWritable, Int
 
     	
 	    while (values.iterator().hasNext()) {
-	        int follower = values.iterator().next().get();
-	        	user.addFollower(follower);
+	        int f = values.iterator().next().get();
+	        if(f < 0)
+	        	user.addFollowing(f);
+	        else
+	        	user.addFollower(f); 
 	    }
 	
 	    

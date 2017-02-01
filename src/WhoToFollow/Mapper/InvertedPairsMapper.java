@@ -23,6 +23,7 @@ public class InvertedPairsMapper extends Mapper<Object, Text, IntWritable, IntWr
         while (st.hasMoreTokens()) {
         	friend.set(Integer.parseInt(st.nextToken()));
         	context.write(friend, user);
+        	context.write(user, new IntWritable(-1 * friend.get()));
         }
     }
 	
