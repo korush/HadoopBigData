@@ -12,13 +12,14 @@ public class GeneratePairsReducer  extends Reducer<IntWritable, IntWritable, Int
     public void reduce(IntWritable key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException 
     {
     	UserProfile user = new UserProfile(key.get());
-	    	        
+
+    	
 	    while (values.iterator().hasNext()) {
 	        int friend = values.iterator().next().get();
-	        if(!user.isFriend(friend))
 	        	user.addFriend(friend);
 	    }
 	
+	    System.out.println(user.toString());
 	    Text result = new Text(user.toString());
 	    context.write(key, result);
 }

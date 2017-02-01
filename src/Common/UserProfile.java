@@ -35,11 +35,35 @@ public class UserProfile
 	
 	public void addFriend(Integer friend)
 	{
-		this.friends.add(friend);
+		int idx1 = this.friends.indexOf(friend);
+		int idx2 = this.friends.indexOf( -1 * friend);
+		
+		if( idx1 < 0 && idx2 < 0)
+		{
+			this.friends.add(friend);
+			return;
+		}
+		
+		if(idx2 >= 0 && friend > 0)
+			return;
+		
+		if(idx1 >= 0 && friend < 0)
+			return;
+		
+		if(idx2 >= 0 && friend < 0)
+		{
+			this.friends.set(idx2, friend);
+			return;
+		}
+		
+		if(idx1 >= 0 && friend > 0)
+			return;
+		
 	}
 	
 	public boolean isFriend(Integer friend)
 	{
+		
 		for (Integer f : this.friends)
             if (f == friend)
             	return true;

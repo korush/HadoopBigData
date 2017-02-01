@@ -33,7 +33,8 @@ public class AllPairMapper extends Mapper<Object, Text, IntWritable, IntWritable
             }
             seenFriends.add(friend1.get());
             
-            context.write(user, new IntWritable(-1 * friend1.get()));
+//            context.write(user, new IntWritable(-1 * friend1.get()));
+            context.write(user, friend1);
             
         }
     }

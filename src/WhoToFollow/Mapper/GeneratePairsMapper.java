@@ -14,15 +14,16 @@ public class GeneratePairsMapper extends Mapper<Object, Text, IntWritable, IntWr
     	
         StringTokenizer st = new StringTokenizer(values.toString());
         
-        IntWritable profileOwner = new IntWritable();
-        IntWritable friend = new IntWritable();
+        IntWritable user = new IntWritable();
+               
+        int friend;
         
-        profileOwner.set(Integer.parseInt(st.nextToken())); 
+        user.set(Integer.parseInt(st.nextToken()));
+        
         while (st.hasMoreTokens()) {
-
-        	friend.set(Integer.parseInt(st.nextToken()));
-        	context.write(profileOwner, friend);
-        	context.write(friend, profileOwner);
+        	friend = Integer.parseInt(st.nextToken());
+        	context.write(user, new IntWritable(-1 * friend)  );
+        	context.write(new IntWritable(friend), user);
         }
     }
 	
