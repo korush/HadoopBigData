@@ -6,7 +6,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 import Common.UserProfile;
 
-public class GeneratePairsReducer  extends Reducer<IntWritable, IntWritable, IntWritable, Text> 
+public class InvertedPairsReducer  extends Reducer<IntWritable, IntWritable, IntWritable, Text> 
 {
 
     public void reduce(IntWritable key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException 

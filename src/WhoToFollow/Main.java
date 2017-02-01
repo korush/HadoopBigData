@@ -13,9 +13,10 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.chain.ChainMapper;
 
 import WhoToFollow.Mapper.AllPairMapper;
-import WhoToFollow.Mapper.GeneratePairsMapper;
+import WhoToFollow.Mapper.InvertedPairsMapper;
 import WhoToFollow.Reducer.CountReducer;
-import WhoToFollow.Reducer.GeneratePairsReducer;
+import WhoToFollow.Reducer.InvertedPairsReducer;
+
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.jobcontrol.ControlledJob;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
@@ -48,7 +49,7 @@ public class Main {
 	
 	public static void main(String args[]) throws Exception, IOException, InterruptedException, ClassNotFoundException
 	{
-		if(runJob("InvertedList", args[0], "FullList", GeneratePairsMapper.class, GeneratePairsReducer.class))
+		if(runJob("InvertedList", args[0], "FullList", InvertedPairsMapper.class, InvertedPairsReducer.class))
 			System.exit(runJob("Who to Follow", "FullList", args[1], AllPairMapper.class, CountReducer.class) ? 0 : 1);
 	}
 }

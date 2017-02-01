@@ -7,7 +7,7 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class GeneratePairsMapper extends Mapper<Object, Text, IntWritable, IntWritable>
+public class InvertedPairsMapper extends Mapper<Object, Text, IntWritable, IntWritable>
 {
 	public void map(Object key, Text values, Context context) throws IOException, InterruptedException
 	{
