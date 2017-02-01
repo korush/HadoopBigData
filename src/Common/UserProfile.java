@@ -13,15 +13,15 @@ public class UserProfile
 	public UserProfile(Integer uid)
 	{
 		this.setUser(uid);
-		this.friends = new ArrayList<Integer>();
+		this.followers = new ArrayList<Integer>();
 		this.commonFriends = new HashMap<Integer, Integer>();
 	}
 	
 	private Integer user;
 	
-	private ArrayList<Integer> friends;
+	private ArrayList<Integer> followers;
 	
-	private HashMap<Integer, Integer> commonFriends;
+	public HashMap<Integer, Integer> commonFriends;
 	
 	public void setUser(Integer uid)
 	{
@@ -33,61 +33,15 @@ public class UserProfile
 		return this.user;
 	}
 	
-	public void addFriend(Integer friend)
+	public void addFollower(Integer follower)
 	{
-		int idx1 = this.friends.indexOf(friend);
-		int idx2 = this.friends.indexOf( -1 * friend);
-		
-		if( idx1 < 0 && idx2 < 0)
-		{
-			this.friends.add(friend);
-			return;
-		}
-		
-		if(idx2 >= 0 && friend > 0)
-			return;
-		
-		if(idx1 >= 0 && friend < 0)
-			return;
-		
-		if(idx2 >= 0 && friend < 0)
-		{
-			this.friends.set(idx2, friend);
-			return;
-		}
-		
-		if(idx1 >= 0 && friend > 0)
-			return;
-		
+		this.followers.add(follower);
 	}
 	
-	public boolean isFriend(Integer friend)
-	{
-		
-		for (Integer f : this.friends)
-            if (f == friend)
-            	return true;
-		
-		return false;
-        
-	}
 	
-	public void addCommonFriend(Integer friend)
+	public void addCommonFriend(Integer friend, Integer count)
 	{
-		if(friend < 0)
-		{
-			this.addFriend(friend);
-			this.commonFriends.remove(-1 * friend); 
-			return;
-		}
-		
-		if(this.isFriend(-1 * friend))
-		{
-			this.commonFriends.remove(-1 * friend);
-			return;
-		}
-		
-		this.commonFriends.put(friend, this.commonFriends.getOrDefault(friend, 0) + 1);
+		this.commonFriends.put(friend, count);
 	}
 
 	public String toStringCommonFriends()
@@ -115,7 +69,7 @@ public class UserProfile
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer("");
-		for (Integer f : this.friends)
+		for (Integer f : this.followers)
 			sb.append(f + " ");
         
 		return sb.toString().trim();

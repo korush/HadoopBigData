@@ -15,11 +15,11 @@ public class GeneratePairsReducer  extends Reducer<IntWritable, IntWritable, Int
 
     	
 	    while (values.iterator().hasNext()) {
-	        int friend = values.iterator().next().get();
-	        	user.addFriend(friend);
+	        int follower = values.iterator().next().get();
+	        	user.addFollower(follower);
 	    }
 	
-	    System.out.println(user.toString());
+	    
 	    Text result = new Text(user.toString());
 	    context.write(key, result);
 }
