@@ -1,0 +1,15 @@
+Requirments to build the project
+1-Eclipse 
+2-hadoop-2.7.3
+3-hadoop should be installed in $Home/hadoop-2.7.3
+
+Run the project:
+the application accepts two parameters
+1- the input file
+2- the output directory
+
+the repository is available on github as well. the url of the repository is
+https://github.com/korush/HadoopBigData
+the repository on the github will be public repository after Februrary 13 2017.
+
+
